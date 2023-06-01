@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<head>
+	<title>Student Information Form</title>
+	<style>
+		table {
+			width: 100%;
+		}
+
+		table td {
+			padding: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Student Information Form</h1>
+
+	<form method="post">
+		{% csrf_token %}
+		<table>
+			<tr>
+				<td>book</td>
+				<td><input type="text" name="book"></td>
+			</tr>
+			<tr>
+				<td>year</td>
+				<td><input type="text" name="year"></td>
+			</tr>
+			<tr>
+				<td>price</td>
+				<td><input type="text" name="price"></td>
+			</tr>
+		</table>
+		<br>
+		<input type="submit" name="add_book" value="Submit">
+	</form>
+
+	<table border="1">
+		<tr>
+			<th>book</th>
+			<th>price</th>
+			<th>year</th>
+			<th>delet Students</th>
+		</tr>
+
+		{% for book in books %}
+		<tr>
+			<td>{{book.1}}</td>
+			<td>{{book.2}}</td>
+			<td>{{book.3}}</td>
+			<td>
+
+				<form action="" method="post">
+
+					<input type="hidden" name="id" value="{{book.0}}">
+					<input type="submit" name="delete" value="delete">
+
+				</form>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	<br><br><br>
+</body>
+
+<script>
+	if (window.history.replaceState) {
+		window.history.replaceState(null, null, window.location.href);
+	}
+</script>
+
+{% endblock %}
